@@ -10,8 +10,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      # with:
-      #   repository: ovrcome/release-notes
+      with:
+        repository: madleech/update-release-notes-changelog
     - name: Install JS dependencies
       run: cd .github/actions/update-changelog && npm install
     - name: Add release to server release notes
@@ -24,8 +24,8 @@ jobs:
         body: ${{ github.event.release.body }}
     - name: Show result
       run: cat sample_changelog.md
-    # - name: Commit result
-    #   run: |
-    #     git add *.md
-    #     git commit -m "Add ${{ github.event.release.tag_name }}"
-    #     git push
+    - name: Commit result
+      run: |
+        git add *.md
+        git commit -m "Add ${{ github.event.release.tag_name }}"
+        git push

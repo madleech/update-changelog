@@ -12,6 +12,8 @@ jobs:
       uses: actions/checkout@v4
       # with:
       #   repository: ovrcome/release-notes
+    - name: Install JS dependencies
+      run: cd .github/actions/update-changelog && npm install
     - name: Add release to server release notes
       uses: ./.github/actions/update-changelog
       with:

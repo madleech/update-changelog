@@ -1,0 +1,29 @@
+on:
+  release:
+    types: [published, edited]
+
+name: Update release notes
+
+jobs:
+  update-release-notes:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      # with:
+      #   repository: ovrcome/release-notes
+    - name: Add release to server release notes
+      uses: ./.github/actions/update-changelog
+      with:
+        filename: sample_changelog.md
+        version: ${{ github.event.release.tag_name }}
+        date: ${{ github.event.release.published_at }}
+        title: ${{ github.event.release.name }}
+        body: ${{ github.event.release.body }}
+    - name: Show result
+      run: cat sample_changelog.md
+    # - name: Commit result
+    #   run: |
+    #     git add *.md
+    #     git commit -m "Add ${{ github.event.release.tag_name }}"
+    #     git push

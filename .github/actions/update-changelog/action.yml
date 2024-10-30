@@ -1,0 +1,22 @@
+name: 'Update Changelog'
+description: 'Update a changelog'
+inputs:
+  filename:
+    description: 'Filename of the changelog to update'
+    required: true
+    default: "CHANGELOG.md"
+  version:
+    description: 'Version tag of the new release, e.g. "v1.2.3". Leading "v" will be stripped.'
+    required: true
+  date:
+    description: 'Date of the release, e.g. "2024-10-28T20:48:08Z". Any time component will be stripped and no timezone conversion will be done'
+    required: true
+  title:
+    description: 'Title of the release, e.g. "Introducing Flogzilla Support"'
+    required: true
+  body:
+    description: 'Body of the release, including "### Added", "### Removed" and/or "### Fixed" sections, formatted as markdown'
+    required: true
+runs:
+  using: 'node20'
+  main: 'index.js'

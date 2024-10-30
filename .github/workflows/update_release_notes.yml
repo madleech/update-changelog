@@ -10,22 +10,28 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    - name: Checkout release notes
+      uses: actions/checkout@v4
       with:
         repository: madleech/update-release-notes-changelog
+        path: changelog
+        token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
     - name: Install JS dependencies
       run: cd .github/actions/update-changelog && npm install
     - name: Add release to server release notes
       uses: ./.github/actions/update-changelog
       with:
-        filename: sample_changelog.md
+        filename: changelog/sample_changelog.md
         version: ${{ github.event.release.tag_name }}
         date: ${{ github.event.release.published_at }}
         title: ${{ github.event.release.name }}
         body: ${{ github.event.release.body }}
     - name: Show result
-      run: cat sample_changelog.md
+      run: cat changelog/sample_changelog.md
     - name: Commit result
       run: |
+        cd changelog
+        ls -lA
         git add *.md
         git commit -m "Add ${{ github.event.release.tag_name }}"
         git push

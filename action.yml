@@ -1,8 +1,8 @@
-name: 'Update Changelog'
-description: 'Update a changelog'
+name: "Update Changelog"
+description: "Update a changelog"
 inputs:
   filename:
-    description: 'Filename of the changelog to update'
+    description: "Filename of the changelog to update"
     required: true
     default: "CHANGELOG.md"
   version:
@@ -18,5 +18,5 @@ inputs:
     description: 'Body of the release, including "### Added", "### Removed" and/or "### Fixed" sections, formatted as markdown'
     required: true
 runs:
-  using: 'node20'
-  main: 'index.js'
+  using: "node20"
+  main: "index.js"

@@ -45,7 +45,7 @@ jobs:
         with:
           ref: ${{ github.event.repository.default_branch }}
       - name: Add release to server release notes
-        uses: madleech/update-changelog
+        uses: madleech/update-changelog@v1
         with:
           filename: CHANGELOG.md
           version: ${{ github.event.release.tag_name }}
@@ -80,6 +80,6 @@ The remaining steps should remain the same.
 
 ## Development
 
-The action's logic is contained in `index.js`. Tests are contained in `__tests__` and use Jest.
+The action's logic is contained in `index.js` and `src/*`. Tests are contained in `src/__tests__` and use Jest.
 
 To run tests use `npm run test`.

@@ -42,6 +42,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
       - name: Add release to server release notes
         uses: madleech/update-changelog
         with:
@@ -59,6 +61,8 @@ jobs:
           git push
 ```
 
+Note that it's important to checkout the default branch of your repository, as by default the `checkout` action will clone the tag that the release is for.
+
 A more complex example might keep the changelogs elsewhere, for example in a public repository. In this case, you will need to handle cloning the repository that contains the changelogs, and commit the results back. You will also need to ensure you use a personal access token that has permission to access the repository, as the automatic workflow token only has rights to the repository it is running on.
 
 To do this, ammend the checkout step to be:
@@ -68,6 +72,7 @@ To do this, ammend the checkout step to be:
   uses: actions/checkout@v4
   with:
     repository: ...
+    ref: ${{ github.event.repository.default_branch }}
     token: ${{ secrets.GH_PAT }}
 ```
 

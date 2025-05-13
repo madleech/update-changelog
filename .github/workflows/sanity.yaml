@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - uses: ./
+      - uses: madleech/update-changelog@v0
         with:
           version: ${{ github.event.release.tag_name }}
           date: ${{ github.event.release.published_at }}
